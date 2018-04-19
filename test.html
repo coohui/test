@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<style type="text/css">
+.circular{
+	width: 60px;height: 60px;border-radius:50%;background: red;
+	animation:rotate 2s infinite;
+}	
+@keyframes rotate{
+	0%{
+      transform:rotateY(0deg);
+	}
+	100%{
+      transform:rotateY(360deg);
+	}
+}
+/* .test{
+  background: red;
+  position: absolute;
+  top:0;
+  left: 10px;
+  right: 10px;
+  bottom: 0;
+  margin:auto;
+  //left: 0;
+  //right: 0;
+  //width:calc(100% - 20px);
+  height: 0;
+  padding-top:50%;
+}
+.txtWrap{
+  background: yellow;
+  position: absolute;
+  top:0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: table;
+}
+.txt{
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  font-size:20px;
+} */
+/*方法二*/
+.txt{
+  background: red;
+  position: absolute;
+  top:0;
+  left: 10px;
+  right: 10px;
+  bottom: 0;
+  margin:auto;
+  flex: 1;
+  text-align: center;
+  color: #fff;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  padding: 25% 0;
+  height:0;
+}
+</style>
+</head>
+<body>
+<!-- <div class="test">
+  <div class="txtWrap">
+     <span class="txt">A</span>
+  </div>
+</div> -->
+
+<div class="txt">A</div>
+ <div id='test' name="testId">
+  <p name="first">first</p>
+</div>
+<div id="obj"></div>
+<div class="circular">3</div> 
+</body>
+</html>
+<script>
+// dt、p以及 h1~h6 这些标签里面都不能再嵌套块元素
+// 另外还有一些要注意的嵌套规则：
+// a标签不能嵌套a
+// 内联标签不能嵌套块标签
+
+// 想要触发BFC 方法有很多  
+// 这里我粗略的总结了一些 大家可以参考一下：
+// float的值不为none
+// overflow的值不为visible
+// display的值为 table-cell、table-caption和inline-block之一
+// position的值不为 static或 relative中的任何一个
+
+// 相对定位的特性：
+//     a、不影响元素本身的特性；
+//     b、不会使元素脱离文档流（元素移动之后原始位置会被保留）；
+//     c、如果没有定位偏移量，对元素本身没有任何影响；
+//     d、提升层级
+// 绝对定位的特性：
+//     a、使元素完全脱离文档流；
+//     b、使内嵌元素支持宽高；
+//     c、让块元素默认由内容撑开宽度；
+//     d、如果有定位父级相对于定位父级发生偏移，没有定位父级相对于document发生偏移；
+//     e、相对定位一般都是配合绝对定位元素使用；
+//     f、提升层级
+
+// 浮动的特性大家参考一下：
+//     1、让块元素在一排显示
+//     2、让内联元素支持宽高
+//     3、默认由内容撑开宽度
+//     4、脱离文档流（不会撑开父级的高度——塌陷，坍缩）
+//     5、阻止margin叠压
+
+var str='D';
+alert(str.charCodeAt());
+//如何判断一个对象是数组？
+var arr=[];console.log(arr instanceof Array);//true
+//跨页面定义的数组，在另一页面判断时
+Object.prototype.toString.call(arr)==="[object Array]";
+//获取页面宽高
+var obody=document.getElementsByTagName('body')[0];
+alert('宽：'+document.documentElement.clientWidth+'高：'+document.documentElement.clientHeight );
+
+var test=document.getElementById('test');
+var obj=document.getElementById('obj');
+var p=document.createElement('p');
+p.innerHTML='I am a test element!';
+//test.appendChild(p);//不可以传字符串
+//test.append(p);//可以传字符串
+console.log(test.getAttribute('name'));
+test.setAttribute('name','changeTestId');
+console.log(test.getAttribute('name'));
+
+console.log(test.nodeName);
+console.log(test.nodeValue);
+console.log(test.nodeType);
+
+for(key in document){
+  document.write(key+'==='+document[key]+'<br/>');
+}
+
+console.log(null==null);//true
+console.log(null==undefined);//true
+console.log(null===null);//true
+
+console.log(parseInt('X8X8')+parseFloat('8')); //NaN   parseInt('X8X8')字符开头则会转成NaN
+console.log(parseInt('8X8')+parseFloat('8')); //16
+parseInt('09/08/2009');//9 非数字字符后面的都不解析
+console.log(parseInt('0X899pppp'));//2201 0X表示16进制 把899转换成了2201
+
+if ([] == false) {console.log(1);};
+if ({} == false ) {console.log(2);};
+if ([]) {console.log(3);};
+if ([1] == [1]) {console.log(4);};
+//1 3
+var str='   aaaa    ';
+String.prototype.testTrim=function(){
+   return this.replace(/(^\s+)|(\s+$)/g,'');
+}
+console.log(str.testTrim());
+
+//Math对象
+console.log(Math.abs(-20));
+console.log(Math.ceil(5.1));//向上取整
+console.log(Math.floor(5.9));//向下取整
+console.log(Math.round(5.9));
+console.log(Math.random());
+console.log(Math.pow(2,3));//8
+console.log(Math.exp(2));
+console.log(Math.sqrt(6));
+console.log(Math.max(2,3));
+console.log(Math.min(2,3));
+console.log(Math.sin(30));//返回数的正弦
+console.log(Math.cos(30));//返回数的余弦
+console.log(Math.tan(30));//返回角的正切
+console.log(Math.asin(30));//返回数的反正弦值
+console.log(Math.acos(30));//返回数的反余弦值
+console.log(Math.atan(30));  //以介于 -PI/2 与 PI/2 弧度之间的数值来返回 x 的反正切值
+console.log(Math.atan2(30));//返回从 x 轴到点 (x,y) 的角度（介于 -PI/2 与 PI/2 弧度之间）
+console.log('String--------------------------------------');
+var str='abcde';
+//String
+console.log(str.charAt(1));//b
+console.log(str.charCodeAt());//97
+console.log(str.concat('ef'));//abcdeef
+console.log(String.fromCharCode(68));//D
+console.log(str.indexOf('d'));//3
+console.log(str.lastIndexOf('e'));//4
+console.log(str.match('b'));//["b", index: 1, input: "abcde"]
+console.log(str.replace('b','*'));//a*cde
+console.log(str.search('c'));//2
+console.log(str.slice(-2,-1));//d
+console.log(str.split(''));//["a", "b", "c", "d", "e"]
+console.log(str.substr(-2,-1));//''
+console.log(str.substring(-2,-1));//''
+console.log(str.toLowerCase());//abcde
+console.log(str.toUpperCase());//ABCDE
+//valueOf()：返回最适合该对象类型的原始值；
+//toString(): 将该对象的原始值以字符串形式返回。
+console.log(str.valueOf());//abcde 
+var arr=new Array(3); 
+for(var i in arr){
+    console.log(i+':'+arr[i])
+}
+
+//width:100%; white-space:nowrap; text-overflow:ellipsis; -o-text-overflow:ellipsis; overflow:hidden; white-space:wrap;
+
+/*<meta http-equiv="x-dns-prefetch-control" content="on">  //开启DNS预读取  off关
+<link rel="dns-prefetch" href="//www.5tweb.cn">
+<link rel="dns-prefetch" href="//5tweb.cn">
+<link rel="dns-prefetch" href="//5tweb.cn">*/
+
+/*一、语法题
+1、阐述说明：var、let、const的区别?(10分)
+2、请用Javascript完成如下叙述：(20分)
+1)获取一个纯数字数组中的最大元素，
+法一:Math.max(...arr);
+法二:Math.max.apply(null,arr);
+2)编写一个函数，合并所有传入数组
+
+3)获取一个集合所有的Key
+
+4)同步发送N个Request，并集中处理Response 
+
+5)编写一个异步函数，延时60毫秒输出：Hello World
+
+3、请用es6重构以下代码（30分）
+1) var jsonParser=require('body-parser').jsonParser;
+2) var body=request.body;
+   var username=body.username;
+   var password=body.password;
+3) var calculate=function ( x, y, z ) {
+  if(typeof x!='number'){
+    x=0;
+  }  
+  if(typeof y!='number'){
+    y=6;
+  }  
+  var dwt= x % y;
+  var result 
+  if(dwt==z) {
+    result=true;
+  }
+  if(dwt!=z) {
+    result = false;
+  } 
+  return result;
+}
+二、程序题
+1.编写一个队列函数，尽可能实现如下功能：(20分)
+1)empty：检测队列是否为空
+2)back：返回队列末尾成员
+3)front：返回队列首位元素
+4)pop：删除队列首位元素
+5)push：推送元素至队列末尾
+6)size返回队列成员个数
+2.列出a、b、c的所有4位排序可能；(20分)
+bca abcb abcc acba acbb acbc
+
+const obj = {
+  name: "jsCoder",
+  skill: ["es6", "react", "angular"],
+  say: function() {
+    for(var i = 1, len = this.skill.length; i<= len; i++){
+     (function (i){
+      setTimeout(function () {
+        console.log('No.' + i + obj.name);
+        console.log(obj.skill[i-1]);
+        console.log('--------------------------');
+      }, 0);
+     })(i);
+     console.log(i);
+    }
+  }
+};
+obj.say();
+
+const obj2 = {
+  name: " jsCoder",
+  skill: ["es6","react","angular"],
+  say: function() {
+    for(var i = 1, len = this.skill.length; i<= len; i++){
+         var _this=this;
+     (function (i,_this){
+      var that=_this;
+      setTimeout(function () {
+        console.log('No.' + i + that.name);
+        console.log(that.skill[i-1]);
+        console.log('--------------------------');
+      }, 0);
+     })(i,_this);
+     console.log(i);
+    }
+  }
+};
+obj2.say();*/
+
+function test(){
+    var oBtn=document.getElementsByTagName('button');
+    for(var i=0;i<oBtn.length;i++){
+       oBtn[i].onclick=bclick;
+       function bclick(){
+          console.log(i);
+          var i=999;
+       }
+    }
+}
+//test();//点击输出的是10
+//为什么呢？因为for循环是没有作用域的，当前作用域在test函数上，变量i会提升到test函数的作用域上；
+//当点击按钮时，会执行函数bclick，输出i,此时该函数内没有定义i
+//此时会向函数外层找，在test函数的作用域上找到了i，而此时的i已经是2了；
+function test(){
+    var oBtn=document.getElementsByTagName('button');
+    for(var i=0;i<oBtn.length;i++){
+       oBtn[i].onclick=bclick;
+       function bclick(){
+          console.log(i);
+          var i=999;
+       }
+    }
+}
+//test();//点击输出的是undefined
+//为什么此时输出undefined？；
+//因为点击按钮，执行函数bclick，js预解析时，发现bclick内有定义i，但是在输出时，i还没被赋值，于是会输出undefined
+//如果var i=999;放输出前，则会输出999
+function test(){
+    var oBtn=document.getElementsByTagName('button');
+    for(var i=0;i<oBtn.length;i++){
+       oBtn[i].onclick=bclick;
+       function bclick(){
+          console.log(i);
+       }
+       bclick();
+    }
+    var i=88;
+    console.log(i);
+}
+//test();
+//输出的是0、1、2 88
+//点击输出88
+//for循环内调用函数bclick分别执行并输出了0，1，2，注意for循环中的i是在test函数作用域上
+//循环结束，此时i已经是2了，然后继续往下走，i又被重新定义并赋值了88
+//此时再点击按钮，输出的就是test作用域中的i,也就是最后被赋值了88的i
+
+//解决按钮点击，分别弹出不同数值的方法
+//下面来介绍3种
+//方法1：
+function test(){
+    var oBtn=document.getElementsByTagName('button');
+    for(let i=0;i<oBtn.length;i++){
+       oBtn[i].onclick=bclick;
+       function bclick(){
+          console.log(i);
+       }
+    }
+}
+//test();
+//通过let把i的作用域控制在循环体内
+//方法2：
+function test(){
+    var oBtn=document.getElementsByTagName('button');
+    for(let i=0;i<oBtn.length;i++){
+       oBtn[i].index=i; 
+       oBtn[i].onclick=bclick;
+       function bclick(){
+          console.log(oBtn[i].index);
+       }
+    }
+}
+//test();
+//把i记录到按钮的自定义属性上
+//方法3：
+function test(){
+    var oBtn=document.getElementsByTagName('button');
+    for(var i=0;i<oBtn.length;i++){
+        (function(i){
+            oBtn[i].onclick=bclick;
+            function bclick(){
+              console.log(i);
+            }
+        })(i);
+    }
+}
+//test();
+//通过闭包的方式
+</script> 
