@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<style type="text/css">
+</style>
+<script type="text/javascript" src="jquery-1.9.1.min.js"></script>
+</head>
+<body>
+    <input type="text" name="">
+</body>
+</html>
+<script>
+// function add () {
+//     var args = Array.prototype.slice.call(arguments);
+//     console.log(args);
+ 
+//     var fn = function () {
+//         var arg_fn = Array.prototype.slice.call(arguments);
+//         return add.apply(null, args.concat(arg_fn));
+//     }
+ 
+//     fn.valueOf = function () {
+//         return args.reduce(function(a, b) {
+//             return a + b;
+//         })
+//     }
+ 
+//     return fn;
+// }
+// add (1,3,4);
+/*function add(...args){
+   var sum=args.reduce((a,b)=>a+b);
+   console.log(sum);
+   var tmp=function(...args){
+      sum=sum+args.reduce((a,b)=>a+b);
+      console.log(sum);
+      return tmp;
+   }
+   tmp.toString=function(){
+    console.log(sum);
+      return sum;
+   }
+   return tmp;
+}
+//console.log(add(1).toString());//1
+//console.log(add(1)(2).toString());//3
+//console.log(add(1,2,3)(10).toString());//16
+console.log(add(1)(2)(3)(4)(5).toString());//15*/
+</script> 
