@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Vue</title>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<style type="text/css">
+</style>
+</head>
+<body>
+
+<section id="app">
+   <h1>{{intro}}</h1>
+   <span :title="message">
+    鼠标悬停几秒钟查看此处动态绑定的提示信息！
+   </span><br/><br/>
+    <span v-if="seen">
+    你看不到我
+   </span>
+   <ul>
+       <li v-for="item in todos">
+          {{item.text}}
+       </li>
+   </ul>
+   <section>
+    <input v-model="addTodos">
+    <button @click="add">增加一条</button>
+   </section>
+</section>
+
+</body>
+</html>
+<script>
+var app2 = new Vue({
+  el: '#app',
+  data: {
+    intro:'我是Vue',
+    message: '页面加载于 ' + new Date().toLocaleString(),
+    seen:true,
+    addTodos:'增加爱好',
+    todos:[
+      {text:'打篮球'},
+      {text:'打羽毛球球'},
+      {text:'打乒乓球'}
+    ]
+  },
+  methods:{
+    add(){
+      this.todos.push({text:this.addTodos});
+    }
+  }
+})
+
+
+</script> 

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Vue</title>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<style type="text/css">
+</style>
+</head>
+<body>
+<section id="app">
+   <h1>{{intro}}</h1>
+   <span :title="message">
+    鼠标悬停几秒钟查看此处动态绑定的提示信息！
+   </span><br/><br/>
+    <span v-if="seen">
+    你看不到我
+   </span>
+   <ul>
+       <todo-item v-for="item in todos" v-bind:todo="item" v-bind:key="item.id"></todo-item>
+   </ul>
+   <section>
+    <input v-model="addTodos">
+    <button @click="add">增加一条</button>
+   </section>
+</section> 
+</body>
+</html>
+<script>
+Vue.component('todo-item',{
+  props:['todo'],
+  template:'<li>{{todo.text}}</li>'
+});
+var vm = new Vue({
+  el: '#app',
+  data: {
+    intro:'我是Vue',
+    message: '页面加载于 ' + new Date().toLocaleString(),
+    seen:true,
+    addTodos:'增加爱好',
+    todos:[
+      {id:0,text:'打篮球'},
+      {id:1,text:'打羽毛球球'},
+      {id:2,text:'打乒乓球'}
+    ]
+  },
+  beforeCreate:function(){
+     console.log('beforeCreate: ' + this.intro)
+  },
+  created:function(){
+     console.log('created: ' + this.intro)
+  },
+  beforeMount:function(){
+      console.log('beforeMount: ' + this.intro)
+  },
+  mounted:function(){
+      console.log('mounted: ' + this.intro)
+  },
+  beforeUndate:function(){
+      console.log('beforeUndate: ' + this.intro)
+  },
+  undated:function(){
+      console.log('undated: ' + this.intro)
+  },
+  beforeDestroy:function(){
+       console.log('beforeDestroy: ' + this.intro)
+  },
+  destroyed:function(){
+       console.log('destroyed: ' + this.intro)
+  },
+  methods:{
+    add(){
+      this.todos.push({text:this.addTodos});
+    }
+  }
+})
+//实例属性与方法
+//vm.$data === data // => true
+//vm.$el === document.getElementById('app') // => true
+vm.$watch('addTodos',function(newValue,oldValue){
+  console.log(newValue);
+  console.log(oldValue);
+});
+</script> 
