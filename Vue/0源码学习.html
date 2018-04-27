@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Vue</title>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<style type="text/css">
+</style>
+</head>
+<body>
+</body>
+</html>
+<script>
+var arr=[];
+var obj={};
+//61
+Object.prototype.toString.call(arr).slice(8, -1);//Array
+Object.prototype.toString.call(obj).slice(8, -1);//Object
+//69
+Object.prototype.toString.call(obj);//[object Object]
+Object.prototype.toString.call(obj);//[object Array]
+//80
+isFinite(number);//非无穷返回true,NaN（非数字），或者是正、负无穷大的数，则返回 false
+//113
+Object.create(null)
+//创建一个没有继承任何原型方法的空对象，也就是说它的原型链没有上一层
+//122
+</script> 

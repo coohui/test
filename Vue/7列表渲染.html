@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Vue</title>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<style type="text/css">
+</style>
+</head>
+<body>
+<section id="app">
+    <ul>
+       <todo-item v-for="item in todos" v-bind:todo="item" v-bind:key="item.id"></todo-item>
+    </ul>
+    <section>
+    <input v-model="addTodos">
+    <button @click="add">增加一条</button>
+    <p v-show="false">{{reverseString}}</p>
+    </section>
+    <ul>
+       <li v-for="(item,index) in todos" v-if="index%2==0">{{index}}.{{item.text}}</li>
+    </ul>
+    <p>obj</p>
+    <ul>
+       <li v-for="(val,key,index) in obj">{{index}}.{{key}}:{{val}}</li>
+    </ul>
+</section> 
+</body>
+</html>
+<script>
+Vue.component('todo-item',{
+  props:['todo'],
+  template:'<li>{{todo.text}}</li>'
+});
+var vm = new Vue({
+  el: '#app',
+  data: {
+    addTodos:'增加爱好',
+    css:{
+      color:'red',
+      fontWeight:'bold',
+      display:'block',
+      textAlign:'center'
+    },
+    todos:[
+      {id:0,text:'打篮球'},
+      {id:1,text:'打羽毛球球'},
+      {id:2,text:'打乒乓球'}
+    ],
+    obj:{
+      a:'lisi',
+      b:'zhangs',
+      c:'wlw'
+    }
+  },
+  methods:{
+    add(){
+      this.todos.push({text:this.reverseString});
+    }
+  },
+  computed:{
+    reverseString(){
+      return this.addTodos.split('').reverse().join('');
+    }
+  },
+  watch:{
+    addTodos(newValue,oldValue){
+      console.log(newValue);
+      console.log(oldValue);
+    }
+  }
+})
+</script> 
