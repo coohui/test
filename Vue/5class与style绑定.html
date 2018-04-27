@@ -8,8 +8,7 @@
 </head>
 <body>
 <section id="app">
-   <h1>{{intro}}</h1>
-   <span :title="message">
+   <span :style="css">
     鼠标悬停几秒钟查看此处动态绑定的提示信息！
    </span><br/><br/>
     <span v-if="seen">
@@ -38,6 +37,12 @@ var vm = new Vue({
     message: '页面加载于 ' + new Date().toLocaleString(),
     seen:true,
     addTodos:'增加爱好',
+    css:{
+      color:'red',
+      fontWeight:'bold',
+      display:'block',
+      textAlign:'center'
+    },
     todos:[
       {id:0,text:'打篮球'},
       {id:1,text:'打羽毛球球'},
