@@ -8,20 +8,32 @@
 </head>
 <body>
 <section id="app">
-   <span :style="css">
-    鼠标悬停几秒钟查看此处动态绑定的提示信息！
-   </span><br/><br/>
+    <div v-if="type === 'A'">
+      A
+    </div>
+    <div v-else-if="type === 'B'">
+      B
+    </div>
+    <div v-else-if="type === 'C'">
+      C
+    </div>
+    <div v-else>
+      Not A/B/C
+    </div>
+    <span :style="css">
+      鼠标悬停几秒钟查看此处动态绑定的提示信息！
+    </span><br/><br/>
     <span v-if="seen">
-    你看不到我
-   </span>
-   <ul>
+      你看不到我
+    </span>
+    <ul>
        <todo-item v-for="item in todos" v-bind:todo="item" v-bind:key="item.id"></todo-item>
-   </ul>
-   <section>
+    </ul>
+    <section>
     <input v-model="addTodos">
     <button @click="add">增加一条</button>
-    <p>{{reverseString}}</p>
-   </section>
+    <p v-show="false">{{reverseString}}</p>
+    </section>
 </section> 
 </body>
 </html>
@@ -33,6 +45,7 @@ Vue.component('todo-item',{
 var vm = new Vue({
   el: '#app',
   data: {
+    type:'B',
     intro:'我是Vue',
     message: '页面加载于 ' + new Date().toLocaleString(),
     seen:true,

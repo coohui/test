@@ -8,20 +8,21 @@
 </head>
 <body>
 <section id="app">
-   <span :style="css">
-    鼠标悬停几秒钟查看此处动态绑定的提示信息！
-   </span><br/><br/>
-    <span v-if="seen">
-    你看不到我
-   </span>
-   <ul>
+    <ul>
        <todo-item v-for="item in todos" v-bind:todo="item" v-bind:key="item.id"></todo-item>
-   </ul>
-   <section>
+    </ul>
+    <section>
     <input v-model="addTodos">
     <button @click="add">增加一条</button>
-    <p>{{reverseString}}</p>
-   </section>
+    <p v-show="false">{{reverseString}}</p>
+    </section>
+    <ul>
+       <li v-for="(item,index) in todos" v-if="index%2==0">{{index}}.{{item.text}}</li>
+    </ul>
+    <p>obj</p>
+    <ul>
+       <li v-for="(val,key,index) in obj">{{index}}.{{key}}:{{val}}</li>
+    </ul>
 </section> 
 </body>
 </html>
@@ -33,9 +34,6 @@ Vue.component('todo-item',{
 var vm = new Vue({
   el: '#app',
   data: {
-    intro:'我是Vue',
-    message: '页面加载于 ' + new Date().toLocaleString(),
-    seen:true,
     addTodos:'增加爱好',
     css:{
       color:'red',
@@ -47,7 +45,12 @@ var vm = new Vue({
       {id:0,text:'打篮球'},
       {id:1,text:'打羽毛球球'},
       {id:2,text:'打乒乓球'}
-    ]
+    ],
+    obj:{
+      a:'lisi',
+      b:'zhangs',
+      c:'wlw'
+    }
   },
   methods:{
     add(){
@@ -56,7 +59,7 @@ var vm = new Vue({
   },
   computed:{
     reverseString(){
-       return this.addTodos.split('').reverse().join('');
+      return this.addTodos.split('').reverse().join('');
     }
   },
   watch:{
