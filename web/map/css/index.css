@@ -1,0 +1,34 @@
+body{
+  margin:0;
+  padding:0;
+  color:#333;
+  font: normal 14px/16px "Microsoft YaHei";  
+}
+.svg-map{
+	margin:20px auto 0;
+	width:1000px;
+	height:700px;
+}
+.tips{
+  display: none 
+}
+.fRect{
+  fill:#a2adff;
+}
+.sRect{
+  fill:#495add;
+}
+.tRect{
+  fill:#c1c8ff;
+}
+.addTxt{
+  height: 30px;
+  line-height: 30px;
+  font-size: 16px;
+  fill: #fff;
+}
+.tipsItem{
+  font-size: 16px;
+  fill: #999;
+}
+

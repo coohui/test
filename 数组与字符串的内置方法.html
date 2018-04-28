@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<style type="text/css">
+</style>
+</head>
+<body>
+</body>
+</html>
+<script>
+  var arr=['a','B','c','d','e','f'];
+  var arrNum=[1,2,3,4,5,6,7];
+  var arrObj=[{name:'one'},{name:'two'}];
+//val某数值 condition 条件值 target 必需。复制到指定目标索引位置。start 可选。元素复制的起始位置。end 可选。停止复制的索引位置 (默认为 array.length)
+// copyWithin(target,start,end)
+//console.log(arr.copyWithin(2,1,3));//['a','b','b','c','e','f']
+// entries()
+//console.log(arr.entries());
+// every(condition) //方法用于检测数组所有元素是否都符合指定条件
+// console.log(arrNum.every(function(a){
+//    return a>2
+// }));//false
+// fill(val,start,end)
+//console.log(arr.fill('hello',1,3));
+// filter(condition)
+// console.log(arrNum.filter(function(a){
+//    return a>2
+// }));//[3,4,5,6,7]
+// find(condition)
+// console.log(arrNum.find(function(a){
+//    return a>2
+// }));//3
+// findIndex(condition)
+// console.log(arrNum.findIndex(function(a){
+//    return a>2
+// }));//2
+// forEach()
+var total=arrNum.forEach(function(index,item){
+   return item+index;
+});
+console.log(total);
+// includes(condition)
+console.log(arrNum.includes(3));//true
+console.log(arrObj.includes({name:'one'}));//false
+// keys()
+// map()
+// reduce()
+// reduceRight()
+// some()
+// toLocaleString()
+//console.log(arr.toLocaleString());
+// toString()
+//console.log(arr.toString());
+// pop()
+// shift()
+// push()
+// unshift()
+// reverse()
+// slice()
+// concat()
+// sort()
+// join()
+// splice()
+// indexOf()
+// lastIndexOf()
+//console.log(arr.lastIndexOf('f'));//5 从后面开始找
+// Symbol()
+</script> 

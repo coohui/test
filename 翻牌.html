@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<style type="text/css">
+
+</style>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+var obj={};
+for(var i=2;i<=100;i++){
+  for(var j=i;j<=100;){
+    j=j+i-1;
+    if(!obj[i]){
+      obj[i]=i;
+    }else{
+      obj[i]=false;
+    }
+  }
+}
+console.log(obj);
+</script> 
