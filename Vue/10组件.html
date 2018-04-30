@@ -1,0 +1,48 @@
+<html>
+<head>
+<title>Vue</title>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<style type="text/css">
+</style>
+</head>
+<body>
+<section id="app">
+<todo-item :name-lists="lists"></todo-item>
+</section> 
+</body>
+</html>
+<script>
+var todos={
+  props:['nameLists'],
+  template:`<ul>
+             <li v-for="item in childNameLists"><input v-model="item.name"/></li>
+            </ul>`,
+  data:function(){
+    this.nameLists.push({
+      id:3,name:'33333'
+    });
+    return {childNameLists:this.nameLists}
+  }
+}
+
+var vm = new Vue({
+  el: '#app',
+  components:{
+    'todo-item':todos,
+    'validate':todos2
+  },
+  data: {
+     lists:[
+       {
+          id:0,name:'000000'
+       },
+       {
+          id:1,name:'111111'
+       },
+       {
+          id:2,name:'222222'
+       }
+     ]
+  }
+})
+</script>

@@ -1,0 +1,49 @@
+<html>
+<head>
+<title>Vue</title>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<style type="text/css">
+</style>
+</head>
+<body>
+<section id="app">
+<h1>{{total}}+{{addNum}}</h1>
+<button-counter v-on:increment="getTotal" :val="1"></button-counter>
+<button-counter v-on:increment="getTotal" :val="2"></button-counter>
+</section> 
+</body>
+</html>
+<script>
+var btnCounter={
+  props:['val'],
+  template:`<button v-on:click="add">加{{counter}}</button>`,
+  data:function(){
+    return {
+      counter:this.val
+    }
+  },
+  methods:{
+     add:function(){
+      this.counter++;
+      this.$emit('increment',{counter:this.counter,inf:'计数器'})
+    }
+  }
+}
+
+var vm = new Vue({
+  el: '#app',
+  components:{
+    'button-counter':btnCounter
+  },
+  data:{
+    total:0,
+    addNum:0
+  },
+  methods:{
+    getTotal:function(playload){
+      this.addNum=playload.inf+':'+playload.counter;
+      this.total+=playload.counter;
+    }
+  }
+})
+</script>

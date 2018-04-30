@@ -1,0 +1,102 @@
+<html>
+<head>
+<title>Vue</title>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<style type="text/css">
+</style>
+</head>
+<body>
+<section id="app">
+    <ul>
+       <todo-item v-for="item in todos" v-bind:todo="item" v-bind:key="item.id"></todo-item>
+    </ul>
+    <section>
+    <input v-model="addTodos">
+    <button @click="add">增加一条</button>
+    <p v-show="false">{{reverseString}}</p>
+    </section>
+    <ul>
+       <li v-for="(item,index) in todos" v-if="index%2==0">{{index}}.{{item.text}}</li>
+    </ul>
+    <p>多选</p>
+    <div v-for="item in todos">
+    	<input type="checkbox" 
+    	:id="item.id" 
+    	:value="item.text" 
+    	v-model="item.isChecked">
+        <label :for="item.id">{{item.text}}</label>
+    </div>
+    <p>单选</p>
+    <div v-for="item in todos">
+    	<input type="radio" 
+    	:id="item.id" 
+    	:value="item.text" 
+    	v-model="radio">
+        <label :for="item.id">{{item.text}}</label>
+    </div>
+    <p>选择框</p>
+	  <select v-model="selected">
+	    <option :disabled="!item.id" :value="item.text" v-for="item in selectData">{{item.text}}</option>
+	  </select>
+     <!-- lazy数据不同步 -->
+	 <input v-model.lazy="addTodos"/>
+    <button @click="showInf('hello word',$event)">{{addTodos}}</button>
+</section> 
+</body>
+</html>
+<script>
+Vue.component('todo-item',{
+  props:['todo'],
+  template:'<li>{{todo.text}}</li>'
+});
+var vm = new Vue({
+  el: '#app',
+  data: {
+    addTodos:'增加爱好',
+    css:{
+      color:'red',
+      fontWeight:'bold',
+      display:'block',
+      textAlign:'center'
+    },
+    todos:[
+      {id:0,text:'打篮球',isChecked:1},
+      {id:1,text:'打羽毛球球',isChecked:0},
+      {id:2,text:'打乒乓球',isChecked:0}
+    ],
+    selected:'打羽毛球球',
+    selectData:[
+      {id:0,text:'请选择',isChecked:1},
+      {id:1,text:'打羽毛球球',isChecked:0},
+      {id:2,text:'打乒乓球',isChecked:0},
+      {id:3,text:'打篮球',isChecked:0}
+    ],
+    radio:'',
+    obj:{
+      a:'lisi',
+      b:'zhangs',
+      c:'wlw'
+    }
+  },
+  methods:{
+    add(event){
+    	console.log(event);
+      this.todos.push({text:this.reverseString});
+    },
+    showInf(mes,e){
+    	alert(mes+' screenX:'+e.screenX+'pageX:'+e.pageX+'clientX:'+e.clientX);
+    }
+  },
+  computed:{
+    reverseString(){
+      return this.addTodos.split('').reverse().join('');
+    }
+  },
+  watch:{
+    addTodos(newValue,oldValue){
+      console.log(newValue);
+      console.log(oldValue);
+    }
+  }
+})
+</script>
