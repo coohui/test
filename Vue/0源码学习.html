@@ -7,6 +7,8 @@
 </style>
 </head>
 <body>
+<input type="text" id="demo">
+<p id="display"></p>
 </body>
 </html>
 <script>
@@ -19,9 +21,105 @@ Object.prototype.toString.call(obj).slice(8, -1);//Object
 Object.prototype.toString.call(obj);//[object Object]
 Object.prototype.toString.call(obj);//[object Array]
 //80
-isFinite(number);//非无穷返回true,NaN（非数字），或者是正、负无穷大的数，则返回 false
+isFinite(12);//非无穷返回true,NaN（非数字），或者是正、负无穷大的数，则返回 false
 //113
-Object.create(null)
 //创建一个没有继承任何原型方法的空对象，也就是说它的原型链没有上一层
-//122
+Object.create(null)
+//195
+// 支持bind函数直接调用，不支持则打补丁
+// bind方法可以改变函数的this指向
+function polyfillBind (fn, ctx) {
+  function boundFn (a) {
+    var l = arguments.length;
+    return l
+      ? l > 1
+        ? fn.apply(ctx, arguments)
+        : fn.call(ctx, a)
+      : fn.call(ctx)
+  }
+
+  boundFn._length = fn.length;
+  return boundFn
+}
+
+function nativeBind (fn, ctx) {
+  return fn.bind(ctx)
+}
+
+var bind = Function.prototype.bind
+  ? nativeBind
+  : polyfillBind;
+
+//以下为面试题中的涉及的问题
+Function.prototype.bind = function (_thisArg,...params){
+	if(typeof this !== 'function') throw new TypeError('必须是函数调用');
+	let that = this,o = Object.create(this.prototype);
+	let fBound = function (...otherParmas) {
+		return that.apply(this instanceof fBound ? o : _thisArg,[...params,...otherParmas]);
+	}
+	// 指向正确的原型
+	fBound.prototype = o;
+	return  fBound;
+};
+
+function list() {
+  return Array.prototype.slice.call(arguments);
+}
+var leadingThirtysevenList = list.bind(undefined, 37);
+//console.log(leadingThirtysevenList());
+//296
+// simple array
+var arr = ['a', 'b', 'c'];
+//console.log(Object.keys(arr)); // console: ['0', '1', '2']
+
+// array like object
+var obj = { 0: 'a', 1: 'b', 2: 'c' };
+//console.log(Object.keys(obj)); // console: ['0', '1', '2']
+
+// array like object with random key ordering
+var anObj = { 100: 'a', 2: 'b', 7: 'c' };
+//console.log(Object.keys(anObj)); // console: ['2', '7', '100']
+
+// getFoo is a property which isn't enumerable
+var myObj = Object.create({}, {
+  getFoo: {
+    value: function () { return this.foo; }
+  } 
+});
+myObj.foo = 1;
+//console.log(Object.keys(myObj)); // console: ['foo']
+//461
+var obj={};
+var descriptor = Object.create(null); // 没有继承的属性
+// 默认没有 enumerable，没有 configurable，没有 writable
+Object.defineProperty(obj, "key", {
+  enumerable: true,//是否可以枚举
+  //当且仅当该属性的 configurable 为 true 时，该属性描述符才能够被改变，
+  //同时该属性也能从对应的对象上被删除。
+  //默认为 false。
+  configurable: true,
+  writable: false,//能否被修改
+  value: "333"
+});
+obj.key=666;
+//console.log(obj);
+
+var obj={};
+var bind=[];
+//触发obj对象set和get方法的时候，趁机来输出或修改bind数组的内容
+Object.defineProperty(obj,'s',{
+    set:function(val){
+        bind['s']=val;
+    },
+    get:function(){
+        return bind['s'];
+    }
+})
+var demo=document.querySelector('#demo');
+var display=document.querySelector('#display');
+//#demo的value值与bind['s']绑定，#display的innerHTML也与bind['s']绑定。
+demo.onkeyup=function(){
+    obj['s']=demo.value;//触发了obj的set方法，等于#demo的value值赋值给bind['s']。
+    display.innerHTML=bind['s'];
+}
 </script> 

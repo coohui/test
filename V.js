@@ -191,7 +191,6 @@ var hyphenate = cached(function (str) {
  * code that was able to run in PhantomJS 1.x, so this must be kept for
  * backwards compatibility.
  */
-
 /* istanbul ignore next */
 function polyfillBind (fn, ctx) {
   function boundFn (a) {
