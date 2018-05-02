@@ -16,54 +16,145 @@
 // copyWithin(target,start,end)
 //console.log(arr.copyWithin(2,1,3));//['a','b','b','c','e','f']
 // entries()
-//console.log(arr.entries());
-// every(condition) //方法用于检测数组所有元素是否都符合指定条件
-// console.log(arrNum.every(function(a){
-//    return a>2
-// }));//false
+//console.log(arr.entries())
 // fill(val,start,end)
-//console.log(arr.fill('hello',1,3));
-// filter(condition)
-// console.log(arrNum.filter(function(a){
-//    return a>2
-// }));//[3,4,5,6,7]
+//console.log(arr.fill('hello',1,3))
 // find(condition)
 // console.log(arrNum.find(function(a){
 //    return a>2
-// }));//3
+// }))//3
 // findIndex(condition)
 // console.log(arrNum.findIndex(function(a){
 //    return a>2
-// }));//2
-// forEach()
-var total=arrNum.forEach(function(index,item){
-   return item+index;
-});
-console.log(total);
+// }))//2
+// Symbol()
 // includes(condition)
-console.log(arrNum.includes(3));//true
-console.log(arrObj.includes({name:'one'}));//false
+//console.log(arrNum.includes(3))//true
+//console.log(arrObj.includes({name:'one'}))//false
 // keys()
-// map()
-// reduce()
-// reduceRight()
+//es5
+// forEach()
+// var forEach=arrNum.forEach(function(item,index,arr){
+//    return item+index;
+// })
+//console.log(forEach);
+// var map=arrNum.map(function(item,index,arr){
+//    return item*2;
+// })
+// console.log(map);
 // some()
+var some=arrNum.some(function(item,index,arr){
+	return item>2
+})
+//console.log(some);
+// every(condition) //方法用于检测数组所有元素是否都符合指定条件
+// var every=arrNum.every(function(item,index,arr){
+//     return item>2
+//  })
+// console.log(every);//false
+// filter(condition)
+// console.log(arrNum.filter(function(item,index,arr){
+//    return item>2
+// }));//[3,4,5,6,7]
+// reduce()
+var reduce=arrNum.reduce(function(prev,cur,index,arr){
+   return prev+cur;
+})
+//console.log(reduce);
+// reduceRight()
+var reduceRight=arrNum.reduceRight(function(prev,cur,index,arr){
+   return prev+cur;
+})
+//es3
 // toLocaleString()
-//console.log(arr.toLocaleString());
+// console.log(arr.toLocaleString());
 // toString()
-//console.log(arr.toString());
+// console.log(arr.toString());
 // pop()
 // shift()
 // push()
 // unshift()
-// reverse()
 // slice()
+// splice()
+// join()
 // concat()
 // sort()
-// join()
-// splice()
+// reverse()
 // indexOf()
 // lastIndexOf()
 //console.log(arr.lastIndexOf('f'));//5 从后面开始找
-// Symbol()
+/*
+ *String
+*/
+var str='abcdefgHIJKLMN';
+var num=123456789;
+//console.log(str.anchor('a'));//创建 HTML 锚
+//<a name="a">abcdefgHIJKLMN</a>
+// big()
+//console.log(str.big());//<big>abcdefgHIJKLMN</big>
+// small()
+//console.log(str.small());//<small>abcdefgHIJKLMN</small>
+// blink()
+//console.log(str.blink());//<blink>abcdefgHIJKLMN</blink>
+// bold()
+//console.log(str.bold());//<b>abcdefgHIJKLMN</b>
+//console.log(str.fixed())//<tt>abcdefgHIJKLMN</tt>
+// fontcolor()
+//console.log(str.fontcolor('a'))//<font color="a">abcdefgHIJKLMN</font>
+// fontsize()
+//console.log(str.fontsize('a'))//<font size="a">abcdefgHIJKLMN</font>
+// italics()
+//console.log(str.italics())//<i>abcdefgHIJKLMN</i>
+// link()
+//console.log(str.link('a'))//<a href="a">abcdefgHIJKLMN</a>
+// strike()
+//console.log(str.strike());//<strike>abcdefgHIJKLMN</strike>
+// sub()
+//console.log(str.sub());//<sub>abcdefgHIJKLMN</sub>
+// sup()
+//console.log(str.sup());//<sup>abcdefgHIJKLMN</sup>
+// codePointAt()
+//console.log(str.codePointAt(1));//98 提取索引字符代码点
+// fixed()//以打字机文本显示字符串
+// localeCompare()
+//console.log(str.localeCompare())//用本地特定的顺序来比较两个字符串
+// normalize()
+//console.log(str.normalize())
+/*
+ * 以下为常用方法
+*/
+// startsWith()
+// console.log(str.startsWith('a'))//true 是否以a开头
+// endsWith()
+// console.log(str.endsWith('N'))//true 是否以N结尾
+// includes()
+// console.log(str.includes('b')) //true 有则返回真
+// match()
+// console.log(str.match('c'))//["c", index: 2, input: "abcdefgHIJKLMN"] 找到一个或多个正则匹配
+// replace()
+// search()
+// repeat()
+// console.log(str.repeat(2)) //abcdefgHIJKLMNabcdefgHIJKLMN 重复2遍
+// concat()
+// console.log(str.concat('123434535'));//abcdefgHIJKLMN123434535
+// String()
+// console.log(String(num))
+// split()
+// slice()
+// substr()
+// substring()
+// indexOf()
+// lastIndexOf()
+// toLocaleLowerCase()
+// toLocaleUpperCase()
+// toLowerCase()
+// toUpperCase()
+// trim()
+// trimLeft()
+// trimRight()
+// charAt()
+// charCodeAt()
+// toString()
+// valueOf()
+// Symbol(Symbol.iterator)
 </script> 
