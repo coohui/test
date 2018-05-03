@@ -355,7 +355,7 @@ var LIFECYCLE_HOOKS = [
   'errorCaptured'
 ];
 
-/*  */
+/**/
 
 var config = ({
   /**
@@ -573,7 +573,7 @@ if (typeof Set !== 'undefined' && isNative(Set)) {
   }());
 }
 
-/*  */
+/**/
 
 var warn = noop;
 var tip = noop;
@@ -823,6 +823,14 @@ var methodsToPatch = [
 ];
 
 /**
+function def (obj, key, val, enumerable) {
+  Object.defineProperty(obj, key, {
+    value: val,
+    enumerable: !!enumerable,
+    writable: true,
+    configurable: true
+  });
+}
  * Intercept mutating methods and emit events
  */
 methodsToPatch.forEach(function (method) {
@@ -851,8 +859,7 @@ methodsToPatch.forEach(function (method) {
   });
 });
 
-/*  */
-
+/* */
 var arrayKeys = Object.getOwnPropertyNames(arrayMethods);
 
 /**
