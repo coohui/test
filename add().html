@@ -3,35 +3,68 @@
 <head>
 <title></title>
 <style type="text/css">
+.li{
+    color: red;
+}
+ul li{
+    color: blue;
+}
 </style>
 </head>
-<body></body>
+<body>
+    <ul>
+        <li class="li">111</li>
+    </ul>
+</body>
 </html>
 <script>
-function add () {
-    var args = Array.prototype.slice.call(arguments);
-    console.log(1);
-    console.log(args);
+// function add () {
+//     var args = Array.prototype.slice.call(arguments);
+//     var fn = function () {
+//         var arg_fn = Array.prototype.slice.call(arguments);
+//         return add.apply(null,args.concat(arg_fn));
+//     }
  
-    var fn = function () {
-        var arg_fn = Array.prototype.slice.call(arguments);
-    console.log(2);
-    console.log(arg_fn);
-        return add.apply(null,args.concat(arg_fn));
-    }
- 
-    fn.valueOf = function () {
-          console.log(3);
-        return args.reduce(function(a, b) {
-            return a + b;
-        })
-    }
- 
-    return fn;
-}
+//     fn.valueOf = function () {
+//           console.log(3);
+//         return args.reduce(function(a, b) {
+//             return a + b;
+//         })
+//     }
+//     return fn;
+// }
 //console.log(add(1)) // 1
 //console.log(add(1,2)(3)) //6
-console.log(add(1)(2)(3)(4)(5)) // 15*/
-var c=add(1)(2);
-alert(c);
+// console.log(add(1)(2)(3)(4)(5)) // 15*/
+// var c=add(1)(2);
+//alert(c);
+// function add(...args){
+//    var sum=args.reduce((a,b)=>a+b);
+//    var tmp=function(...args){
+//       sum+=args.reduce((a,b)=>a+b);
+//       return tmp;
+//    }
+//    tmp.toString=function(){
+//       return sum;
+//    }
+//    return tmp;
+// }
+// 
+function mul(...args){
+  var mul=args.reduce((prev,cur)=>prev*cur);
+
+  var temp=function(...args){
+    mul*=args.reduce((prev,cur)=>prev*cur);
+    return temp;
+  }
+
+  temp.toString=function(){
+    return mul;
+  }
+  return temp;
+}
+console.log(mul(2));//2
+console.log(mul(2)(3));//6
+console.log(mul(2)(3)(6));//36
+console.log(mul(2,4)(3,2)(6,2));//576
 </script> 

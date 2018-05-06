@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+</head>
+<body>
+<script>
+var name='window';
+function Person(name){
+  console.log('最外层：'+this.name);
+  this.name=name;
+  this.show1=function(){
+    console.log(this);
+    var n=this.push(22);
+    console.log(this);
+  	console.log(this.name);
+  }	
+  this.show2=()=>console.log(this.name);
+  this.show3=function(){
+    console.log(this);
+  	return function(){
+  		console.log(this.name);
+  	}
+  }
+  this.show4=function(){
+  	return ()=>console.log(this.name)
+  }
+  return this;
+}
+
+function Animal(age,name){
+  this.age=age;
+  this.name=name;
+  this.show1=function(){
+    console.log('my age is'+this.age);
+  }
+  this.show2=function(){
+    console.log('my name is'+this.name);
+  }
+  this.show5=function(){
+    console.log('my name is'+this.name);
+  }
+  this.show6=function(){
+    console.log('my age is'+this.age);
+  }
+}
+
+var personA = new Person('personA');
+var personB = new Person('personB');
+var Animal = new Animal(12,'sheep');
+
+var obj={
+  name:'zhangs'
+}
+
+//personA.show1.call(Animal);//sheep
+//personA.show2.call(Animal);//personA
+
+//var pAnimal=Person.call(obj);
+//console.log(pAnimal);
+//console.log(pAnimal.name);
+//var pAnimal=Person.call(Animal);
+//console.log(pAnimal);
+//console.log(pAnimal.name);
+
+// personA.show1();//personA
+// personA.show1.call(personB);//personB
+
+// personA.show2();//personA
+// personA.show2.call(personB);//personA
+
+// personA.show3()();//window
+//personA.show3().call(personB);//personB //使用call方法调用匿名函数
+//personA.show3.call(personB)();//window
+
+// personA.show4()();//personA
+// personA.show4().call(personB);//personA
+// personA.show4.call(personB)();//personB
+
+// function test(){
+// 	return function(){
+// 		alert(this);
+// 	}
+// }
+// test().call(null);
+// console.log(test().call(null));//利用call会自动调用匿名函数
+</script>
+</body>
+</html>
