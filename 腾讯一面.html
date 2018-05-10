@@ -34,11 +34,11 @@ var child2 = new Child();
 child1.a=11;
 child2.a=12;
 parent.show();//15:1,2,1
-child1.show();//115:1,2,1
-child2.show();//125:1,2,1
+child1.show();//正确答案 115:1,2,1 =>错误答案 115:1,2,11
+child2.show();//正确答案 125:1,2,1 =>错误答案 125:1,2,12
 child1.change();
 child2.change();
 parent.show();//15:1,2,1
-child1.show();//55:1,2,1,11,12
-child2.show();//65:1,2,1,11,12
+child1.show();//正确答案 55:1,2,1,11,12 =>错误答案 46:1,2,11,11
+child2.show();//正确答案 65:1,2,1,11,12 =>错误答案 46:1,2,12,12
 </script> 
