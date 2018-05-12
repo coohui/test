@@ -8,14 +8,14 @@
 </html>
 <script>
 //2.请问定义a,a必须是引用类型，并且alert(a)显示是3，列举越多的实现方式越好=>alert(typeof(a))=>object;alert(a)=>3;
-//var a = [3,4].slice(0,1);
+//var a = [3].slice(-1);
 //var a=new String(3);
 //var a = [3];=>alert()会默认调用toString()方法
 //10
 function Parent(){
   this.a=1;
   this.b=[1,2,this.a];
-  this.c={demo:5};
+  this.c={demo:5,a:this.a};
   this.show=function(){
   	document.write(this.a+''+this.c.demo+':'+this.b+'<br/>');
   }
@@ -27,6 +27,7 @@ function Child(){
 		this.b.push(this.a);
 		this.a=this.b.length;
 		this.c.demo=this.a++;
+		console.log(this.c);
 	}
 }
 
