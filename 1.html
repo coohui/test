@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+</head>
+<body>
+	<div id="time"></div>
+</body>
+</html>
+<script>
+//1.用正则实现 https://www.baidu.com/?a=11&b=222;=>{a:11,b:222}
+//2.
+// (function(){
+//   var val=1;
+//   var json={
+//   	val:10,
+//   	dbl:function(){
+//   		val*=2;
+//   	}
+//   } 
+//   json.dbl();
+//   alert(json.val+val);//12
+// }())
+
+// window.val=1;
+// var json={
+// 	val:10,
+// 	dbl:function(){
+// 		this.val*=2;
+// 	}
+// }
+// json.dbl();//json.val=>20;
+// var dbl=json.dbl;
+// dbl();//window.val=>2;
+// json.dbl.call(window);//window.val=>4
+// alert(window.val+json.val);//4+20=24
+//3.当天时间倒计时到次日10点，次日之后每到0点开始倒计时到第二天10点
+var time=document.getElementById('time');
+var date=new Date();
+var year=date.getFullYear();
+var month=date.getMonth()+1;
+var day=date.getDate();
+var toDay=year+'-'+month+'-'+day+' 24:00:00';
+
+function run(elem,toDay){
+	var endDay=new Date(toDay);
+	var iNow=new Date();
+	var todaySection=(endDay-iNow)/1000;
+	var tomorromSection=36000;//10*60*60
+	var totalSection=tomorromSection+todaySection;
+	//天24*60*60
+	var str=parseInt(totalSection/86400)+'天'
+			+parseInt(totalSection%86400/3600)+'时'
+			+parseInt(totalSection%86400%3600/60)+'分'
+			+parseInt(totalSection%60)+'秒';
+	elem.innerHTML=str;
+}
+
+setInterval(function(){
+  run(time,toDay);
+},1000);
+
+
+</script> 
