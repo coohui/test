@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title></title>
+<title>test</title>
 </head>
 <body>
 </body>
@@ -9,28 +9,28 @@
 <script>
     // let obj = {}
     // let len = 10000000
+    // console.time('for')
     // for(let i = 0; i< len; i++) {
     //   obj[i] = i
     // }
-    // let t1 = new Date().getTime()
-    // console.log('start', 0)
+    // console.timeEnd('for')
+    // console.time('obj')
     // console.log(obj[len-1])
-    // let t2 = new Date().getTime()
-    // console.log('end',t2-t1)
+    // console.timeEnd('obj')
 
-    // let obj = {}
-    // let len = 10000000
-    // let len2 = len / 10
-    // for(let i = 0; i< len2; i++) {
-    //   let obj2 = {}
-    //   for(let j=0;j<10;j++) {
-    //     obj2[j] = i + j
-    //   }
-    //   obj[i] = obj2
-    // }
-    // let t1 = new Date().getTime()
-    // console.log('start', 0)
-    // console.log(obj[len2-1][9])
-    // let t2 = new Date().getTime()
-    // console.log('end',t2-t1)
+    let obj = {}
+    let len = 10000000
+    let len2 = len / 10
+    console.time('for2')
+    for(let i = 0; i< len2; i++) {
+      let obj2 = {}
+      for(let j=0;j<10;j++) {
+        obj2[j] = i + j
+      }
+      obj[i] = obj2
+    }
+    console.timeEnd('for2')
+    console.time('obj2')
+    console.log(obj[len2-1][9])
+    console.timeEnd('obj2')
 </script> 
