@@ -44,7 +44,6 @@ function trigger(target,key,info){
   }
   const effects = new Set()
   const computedRunners = new Set()
-
   if(key){
     let deps = depMap.get(key)
     // deps里面全部仕effect
@@ -145,10 +144,6 @@ function reactive(target){
   toRaw.set(observed, target)
   return observed
 }
-
-
-
-
 
 // return function render(_ctx, _cache) {
 //   with (_ctx) {
