@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>  </title>
+</head>
+<body>
+</body>
+</html>
+<script>
+// 1.一个页面用了多少种html标签
+[...document.querySelectorAll('*')].map(item => item.tagName).reduce((result, item) => {
+  console.log(result, item)
+  result[item] = (result[item] || 0) + 1
+  return result
+}, {})
+// 2.出现最多的三种是啥，出现多少次
+Object.entries([...document.querySelectorAll('*')].map(item => item.tagName).reduce((result, item) => {
+  result[item] = (result[item] || 0) + 1
+  return result
+}, {})).sort((a, b) => { return b[1] - a[1]}).slice(0, 3)
+// 3. 如果不用匹配符查找元素，只能给你body元素，通过递归来做
+
+</script> 
