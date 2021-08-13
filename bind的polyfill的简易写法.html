@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>bind</title>
+</head>
+<body>
+</body>
+</html>
+<script>
+// 改造的
+function bind(fn, thisArg) {
+  return function wrap() {
+    var args = new Array(arguments.length);
+    for (var i = 0; i < args.length; i++) {
+      args[i] = arguments[i];
+    }
+    return fn.apply(thisArg, args);
+  };
+};
+
+var name = "windows"
+function fn(x, y){
+  var name = "fn"
+  console.log(this.name, x + y);
+}
+var obj = {
+  name:"apply"
+}
+
+var obj1 = {
+  name:"prototypeBind"
+}
+
+var obj2 = {
+  name:"bindFun"
+}
+
+var obj3 = {
+  name:"prototypeBindPollfill"
+}
+
+fn.apply(obj, [2, 3]);
+fn.bind(obj1, 4, 5)(); // 自带的bind
+// pollfill
+Function.prototype.bind = function (thisArg) {
+  var that = this
+  // 此写法可以代替for循环，但是ie不兼容
+  // var args=Array.prototype.slice.call(arguments,1);
+    var args = [];
+  for (var i = 1, len = arguments.length; i < len; i++) {
+    args.push(arguments[i]);
+  }
+
+  return function () {
+    return that.apply(thisArg, args);
+  };
+}
+fn.bind(obj3, 5, 6)(); // Pollfill
+bind(fn, obj2)(7, 8) // axios改造的bind
+</script> 
