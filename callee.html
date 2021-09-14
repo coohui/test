@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<style type="text/css">
+</style>
+</head>
+<body>
+</body>
+</html>
+<script>
+// callee
+// 获取函数自身 用于匿名函数递归调用
+// 举例一
+// arguments伪数组 本质是对象 也有自己的属性callee获取函数自身  length获取实参的个数
+function fn5() {
+	let callee = arguments.callee
+    // console.log(arguments);
+    // console.log(arguments.length); // 获取实参的个数
+    console.log(callee.name); // 获取函数自身 fn5 用于匿名函数递归调用
+    // console.log(fn5.length); // 获取形参的个数
+}
+fn5(10, 20, 30, 40)
+// 举例二
+var test = function (num){
+    let callee = arguments.callee
+    if (Number(num) <= 1) {
+        return 1;
+    }
+    console.log(callee.name, num);
+    return num + callee(num - 1);
+}
+
+var test2 = function (){
+   test(4);
+}
+test2();
+console.log(test(4)); // 1+2+3+4=10
+
+
+// caller
+// 获取调用这个函数的引用(我被谁调用了)
+// 如果函数b中调用函数a 那么函数a的caller就是函数b
+// 如果是全局调用(window调用) 那么函数的caller就是null
+// 举例一
+function func() {
+    let caller = func.caller;
+    console.log("我被" + caller.name + "调用了");
+    while(caller != null) {
+        console.log("我被" + caller.name + "调用了");
+        caller = caller.caller;
+    }
+}
+
+function func1() {
+    func();
+}
+
+function func2() {
+    func1();
+}
+
+function func3() {
+    func2();
+}
+
+func3();
+
+// 举例二
+function fn1() {
+    let caller = fn1.caller;
+    if (caller) {
+        console.log("我fn1是被" + caller.name + "调用的！");
+    } else {
+    	console.log("我fn1是被windows调用的！");
+    }
+}
+function fn2() {
+    let caller = fn2.caller;
+    if (caller) {
+       console.log('我fn2是被' + caller.name + "调用的！");
+    }
+    console.log('我fn2我调用了fn1');
+    fn1(); //fn1的caller就是fn2
+}
+fn2();
+fn1(); //如果是全局调用 window调用 那么fn1.caller就是null
+
+// 总结
+// call 是属于Function.prototype 作用是修改函数中this的指向
+// caller 是属于函数对象的成员 作用是获取调用这个函数的引用(我被谁调用了)
+// callee 是属于arguments对象的 作用是获取函数本身 应用于匿名函数递归调用
+</script> 

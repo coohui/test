@@ -1,0 +1,24 @@
+<html>
+<head>
+<title></title>
+</head>
+<body>
+<script>
+function trim () {
+	var val = document.getElementsByTagName('input')[0].value
+	var re = /(^\s*)|(\s*$)/g
+	var val2 = val.replace(re, '')
+	console.log('----' + val2 + '----')
+}
+
+function trim2 () {
+	var val = document.getElementsByTagName('input')[0].value
+	var val2 = val.replace(/^\s*/, '').replace(/\s*$/, '')
+	console.log('----' + val2 + '----')
+}
+
+</script> 
+<input type="text" value="">
+<button onclick="trim()">a</button>
+</body>
+</html>
