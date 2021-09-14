@@ -19,52 +19,70 @@ ul li{
 </html>
 <script>
 // function add () {
-//     var args = Array.prototype.slice.call(arguments);
-//     var fn = function () {
-//         var arg_fn = Array.prototype.slice.call(arguments);
-//         return add.apply(null,args.concat(arg_fn));
-//     }
- 
-//     fn.valueOf = function () {
-//           console.log(3);
-//         return args.reduce(function(a, b) {
-//             return a + b;
-//         })
-//     }
-//     return fn;
+//   console.log('进入add');
+//   var args = Array.prototype.slice.call(arguments);
+//   var fn = function () {
+//     console.log('调用fn');
+//     var arg_fn = Array.prototype.slice.call(arguments);
+//     return add.apply(null,args.concat(arg_fn));
+//   }
+
+//   fn.valueOf = function () {
+//     console.log('调用valueOf');
+//     return args.reduce(function(a, b) {
+//         return a + b;
+//     })
+//   }
+//   return fn;
 // }
-//console.log(add(1)) // 1
-//console.log(add(1,2)(3)) //6
+// console.log(add(1)) // 1
+// console.log(add(1,2)(3)) //6
 // console.log(add(1)(2)(3)(4)(5)) // 15*/
+
+
 // var c=add(1)(2);
-//alert(c);
-// function add(...args){
-//    var sum=args.reduce((a,b)=>a+b);
-//    var tmp=function(...args){
-//       sum+=args.reduce((a,b)=>a+b);
+// alert(c);
+// function add(...args) {
+//    var sum = args.reduce((a, b) => a + b);
+//    var tmp = function(...args) {
+//       sum += args.reduce((a, b) => a + b);
 //       return tmp;
 //    }
-//    tmp.toString=function(){
+//    tmp.toString = function() {
 //       return sum;
 //    }
 //    return tmp;
 // }
-// 
-function mul(...args){
-  var mul=args.reduce((prev,cur)=>prev*cur);
 
-  var temp=function(...args){
-    mul*=args.reduce((prev,cur)=>prev*cur);
-    return temp;
-  }
+// function mul(...args) {
+//   console.log('进入mul');
+//   var mul = args.reduce((prev, cur) => prev * cur);
 
-  temp.toString=function(){
-    return mul;
+//   var temp = function (...args) {
+//     console.log('调用temp');
+//     mul *= args.reduce((prev, cur) => prev * cur);
+//     return temp;
+//   }
+
+//   temp.toString = function() {
+//     console.log('调用toString');
+//     return mul;
+//   }
+//   return temp;
+// }
+// console.log(mul(2));//2
+// console.log(mul(2)(3));//6
+// console.log(mul(2)(3)(6));//36
+// console.log(mul(2,4)(3,2)(6,2));//576
+
+function add (a) {
+  function s (b) {
+    a = a + b
+    return s
   }
-  return temp;
-}
-console.log(mul(2));//2
-console.log(mul(2)(3));//6
-console.log(mul(2)(3)(6));//36
-console.log(mul(2,4)(3,2)(6,2));//576
+  s.toString = function () {
+    return a
+  }
+  return s
+}  console.log(add(1)(2)(3)(4));
 </script> 

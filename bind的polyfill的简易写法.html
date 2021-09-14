@@ -21,8 +21,13 @@ function bind(fn, thisArg) {
 var name = "windows"
 function fn(x, y){
   var name = "fn"
-  console.log(this.name, x + y);
+  console.log(this, this.name, x + y);
+  return this
 }
+
+fn.prototype.name = 'prototypeFn'
+fn.prototype.nickname = '特务小强'
+
 var obj = {
   name:"apply"
 }
@@ -39,22 +44,47 @@ var obj3 = {
   name:"prototypeBindPollfill"
 }
 
-fn.apply(obj, [2, 3]);
+// var newFn = new fn(0, 1) // new对象的this指向是当前fn函数而不是windows,直接调用fn则是windows
+// console.log(newFn.nickname)
+// fn.apply(obj, [2, 3]);
+var fn1 = fn.bind(obj1, 4, 5); // 自带的bind
 fn.bind(obj1, 4, 5)(); // 自带的bind
+var fn2 = new fn1()
+console.log(fn2.name)
+console.log('-------------------------------------')
+
 // pollfill
 Function.prototype.bind = function (thisArg) {
   var that = this
   // 此写法可以代替for循环，但是ie不兼容
-  // var args=Array.prototype.slice.call(arguments,1);
+  // var args = Array.prototype.slice.call(arguments,1);
   var args = [];
   for (var i = 1, len = arguments.length; i < len; i++) {
     args.push(arguments[i]);
   }
 
-  return function () {
-    return that.apply(thisArg, args);
+  console.log('bind', this, thisArg)
+  /*
+    1. 返回的函数作为构造函数，新函数要继承目标函数的原型
+    2. 一旦把新函数当成构造函数了，目标函数的this应该指向实例对象
+  */
+  var copyFunc = function () {};
+  // 自己实现的bind函数，如果把返回的新函数当成了构造函数，此时会遇到问题，就是找不到目标函数原型上的方法，解决：放新函数继承目标函数的原型
+  var wrap = function (...args2) {
+    console.log('wrap', this, thisArg)
+    // 如果这个函数作为了构造函数，那么目标函数的this，应该执行的是实例对象
+    // 如果这个不是作为构造函数，目标函数中的this还指向thisArg
+    return that.apply(this instanceof copyFunc ? this : thisArg, [...args, ...args2]);
   };
+  // 拷贝原型
+  if (this.prototype) {
+    copyFunc.prototype = this.prototype
+  }
+  wrap.prototype = new copyFunc()
+  return wrap
 }
-fn.bind(obj3, 5, 6)(); // Pollfill
+var f1 = fn.bind(obj3, 5, 6); // Pollfill
+var f2 = new f1()
+console.log(f2.name)
 bind(fn, obj2)(7, 8) // axios改造的bind
 </script> 
