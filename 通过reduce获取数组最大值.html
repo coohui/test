@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+</head>
+<body>
+    <ul>
+        <li class="li">111</li>
+    </ul>
+</body>
+</html>
+<script>
+let arr = [{id: 10},{id: 1},{id: 11},{id: 12},{id: 5},{id: 4}]
+let max = arr.reduce((a, b) => {
+    console.log(3, a.id, b.id)
+    if (a.id > b.id) {
+        console.log(1, a.id)
+        return a
+    } else {
+        console.log(2, b.id)
+        return b
+    }
+})
+console.log('max', max)
+</script>
